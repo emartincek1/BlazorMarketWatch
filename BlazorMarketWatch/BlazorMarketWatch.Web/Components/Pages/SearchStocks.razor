@@ -1,0 +1,26 @@
+﻿@page "/SearchStocks"
+@inherits SearchStocksBase
+
+<MudContainer MaxWidth="MaxWidth.Medium">
+
+    <MudText Typo="Typo.h1" Align="Align.Center" Class="my-4">Search Stocks</MudText>
+
+    <MudGrid Class="mt-10 mb-5" >
+        <MudTextField @bind-Value="TextValue" Label="Search Stock Ticker Here" Variant="Variant.Outlined"></MudTextField>
+    </MudGrid>
+    
+    <MudGrid Class="mb-15" Justify="Justify.Center">
+        <MudItem xs="6">
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" FullWidth="true" Size="Size.Large" Href="">Search</MudButton>
+        </MudItem>
+    </MudGrid>
+
+    <MudText Typo="Typo.h4" Align="Align.Center" Class="mb-7">Popular Stock Shortcuts</MudText>
+
+    <MudGrid >
+        @foreach (var stock in TopStocks)
+        {
+            <MudItem xs="3" sm="2" Class="d-flex align-center justify-center mud-width-full"><MudFab Label="@stock" /></MudItem>
+        }
+    </MudGrid>
+</MudContainer>
