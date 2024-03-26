@@ -1,6 +1,7 @@
 ﻿using BlazorMarketWatch.Models.Dtos;
 using BlazorMarketWatch.Web.Services.Contracts;
 using Microsoft.AspNetCore.Components;
+using MudBlazor;
 
 namespace BlazorMarketWatch.Web.Components.Pages
 {
@@ -16,11 +17,30 @@ namespace BlazorMarketWatch.Web.Components.Pages
 
         public string ErrorMessage { get; set; }
 
+        public string[] XAxisLabels { get; set; }
+
+        public int Index = -1;
+
+        public ChartOptions Options = new ChartOptions();
+
+        public List<ChartSeries> Series = new List<ChartSeries>();
+        public ChartSeries ChartSeries { get; set; }
+
         protected override async Task OnInitializedAsync()
         {
             try
             {
                 Stock = await StockService.GetStock(Symbol, "1day");
+
+                XAxisLabels = [Stock.values[7].datetime, Stock.values[6].datetime, Stock.values[5].datetime, Stock.values[4].datetime, Stock.values[3].datetime, Stock.values[2].datetime, Stock.values[1].datetime];
+
+                ChartSeries = new ChartSeries()
+                {
+                    Name = $"{Stock.meta.symbol}",
+                    Data = new double[] { Convert.ToDouble(Stock.values[7].close), Convert.ToDouble(Stock.values[6].close), Convert.ToDouble(Stock.values[5].close), Convert.ToDouble(Stock.values[4].close),
+                                                                                                    Convert.ToDouble(Stock.values[3].close), Convert.ToDouble(Stock.values[2].close), Convert.ToDouble(Stock.values[1].close),}
+                };
+                Series.Add(ChartSeries);
             }
             catch (Exception ex)
             {
@@ -29,3 +49,7 @@ namespace BlazorMarketWatch.Web.Components.Pages
         }
     }
 }
+
+
+
+

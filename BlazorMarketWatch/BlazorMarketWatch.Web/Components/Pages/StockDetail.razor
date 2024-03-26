@@ -11,7 +11,7 @@ else if (ErrorMessage != null)
 }
 else 
 {
-    <MudContainer Class="mt-10">
+    <MudContainer Class="mt-15">
         <MudGrid>
             <MudItem sm="6">
                 <MudCard>
@@ -33,14 +33,22 @@ else
                         <MudText Typo="Typo.h4">1 Day Values:</MudText>
                     </MudCardHeader>
                     <MudCardContent>
-                        <MudText Typo="Typo.body1">Datetime: @Stock.values[0].datetime</MudText>
-                        <MudText Typo="Typo.body1">Open: $@Stock.values[0].open</MudText>
-                        <MudText Typo="Typo.body1">High: $@Stock.values[0].high</MudText>
-                        <MudText Typo="Typo.body1">Low: $@Stock.values[0].low</MudText>
-                        <MudText Typo="Typo.body1">Close: $@Stock.values[0].close</MudText>
-                        <MudText Typo="Typo.body1">Volume: @Stock.values[0].volume</MudText>
+                        <MudText Typo="Typo.body1">Datetime: @Stock.values[1].datetime</MudText>
+                        <MudText Typo="Typo.body1">Open: $@Stock.values[1].open</MudText>
+                        <MudText Typo="Typo.body1">High: $@Stock.values[1].high</MudText>
+                        <MudText Typo="Typo.body1">Low: $@Stock.values[1].low</MudText>
+                        <MudText Typo="Typo.body1">Close: $@Stock.values[1].close</MudText>
+                        <MudText Typo="Typo.body1">Volume: @Stock.values[1].volume</MudText>
                     </MudCardContent>
                 </MudCard>
+            </MudItem>
+        </MudGrid>
+
+        <MudText Typo="Typo.h3" Align="Align.Center" Class="my-10">Daily Chart: </MudText>
+
+        <MudGrid Justify="Justify.Center">
+            <MudItem>
+                <MudChart ChartType="ChartType.Line" ChartSeries="@Series" @bind-SelectedIndex="Index" XAxisLabels="@XAxisLabels" Width="100%" Height="350px" ChartOptions="@Options" />
             </MudItem>
         </MudGrid>
     </MudContainer>

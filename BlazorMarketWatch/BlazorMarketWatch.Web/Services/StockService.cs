@@ -19,7 +19,7 @@ namespace BlazorMarketWatch.Web.Services
                 using var httpClient = httpClientFactory.CreateClient();
 
                 var stockData = await httpClient.GetFromJsonAsync<StockDto.Rootobject>(
-                    $"https://api.twelvedata.com/time_series?symbol={symbol}&interval={interval}&outputsize=1&apikey=1aaff2c87d404866a270852a157e04b7");
+                    $"https://api.twelvedata.com/time_series?symbol={symbol}&interval={interval}&outputsize=10&apikey=1aaff2c87d404866a270852a157e04b7");
 
                 return stockData;
             }
