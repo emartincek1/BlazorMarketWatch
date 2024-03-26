@@ -1,0 +1,47 @@
+﻿@page "/StockDetail/{Symbol}"
+@inherits StockDetailBase
+
+@if (Stock == null && ErrorMessage == null)
+{
+    <h1>Loading...</h1>
+}
+else if (ErrorMessage != null)
+{
+    <h1>@ErrorMessage</h1>
+}
+else 
+{
+    <MudContainer Class="mt-10">
+        <MudGrid>
+            <MudItem sm="6">
+                <MudCard>
+                    <MudCardHeader>
+                        <MudText Typo="Typo.h3">@Stock.meta.symbol</MudText>
+                    </MudCardHeader>
+                    <MudCardContent>
+                        <MudText Typo="Typo.body1">Currency: @Stock.meta.currency</MudText>
+                        <MudText Typo="Typo.body1">Exchange Timezone: @Stock.meta.exchange_timezone</MudText>
+                        <MudText Typo="Typo.body1">Exchange: @Stock.meta.exchange</MudText>
+                        <MudText Typo="Typo.body1">Mic code: @Stock.meta.mic_code</MudText>
+                        <MudText Typo="Typo.body1">Type: @Stock.meta.type</MudText>
+                    </MudCardContent>
+                </MudCard>
+            </MudItem>
+            <MudItem sm="6">
+                <MudCard>
+                    <MudCardHeader>
+                        <MudText Typo="Typo.h4">1 Day Values:</MudText>
+                    </MudCardHeader>
+                    <MudCardContent>
+                        <MudText Typo="Typo.body1">Datetime: @Stock.values[0].datetime</MudText>
+                        <MudText Typo="Typo.body1">Open: $@Stock.values[0].open</MudText>
+                        <MudText Typo="Typo.body1">High: $@Stock.values[0].high</MudText>
+                        <MudText Typo="Typo.body1">Low: $@Stock.values[0].low</MudText>
+                        <MudText Typo="Typo.body1">Close: $@Stock.values[0].close</MudText>
+                        <MudText Typo="Typo.body1">Volume: @Stock.values[0].volume</MudText>
+                    </MudCardContent>
+                </MudCard>
+            </MudItem>
+        </MudGrid>
+    </MudContainer>
+}

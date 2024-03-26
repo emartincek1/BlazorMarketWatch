@@ -1,4 +1,6 @@
 using BlazorMarketWatch.Web.Components;
+using BlazorMarketWatch.Web.Services;
+using BlazorMarketWatch.Web.Services.Contracts;
 using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +10,9 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 builder.Services.AddMudServices();
+
+builder.Services.AddHttpClient();
+builder.Services.AddScoped<IStockService, StockService>();
 
 var app = builder.Build();
 
