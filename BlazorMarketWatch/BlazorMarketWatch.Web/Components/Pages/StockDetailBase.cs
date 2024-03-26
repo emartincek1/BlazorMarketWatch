@@ -38,13 +38,14 @@ namespace BlazorMarketWatch.Web.Components.Pages
             {
                 Stock = await StockService.GetStock(Symbol, TimeInterval);
 
-                XAxisLabels = [Stock.values[7].datetime, Stock.values[6].datetime, Stock.values[5].datetime, Stock.values[4].datetime, Stock.values[3].datetime, Stock.values[2].datetime, Stock.values[1].datetime];
+                XAxisLabels = [Stock.values[7].datetime, Stock.values[6].datetime, Stock.values[5].datetime, Stock.values[4].datetime, 
+                                Stock.values[3].datetime, Stock.values[2].datetime, Stock.values[1].datetime, Stock.values[0].datetime,];
 
                 ChartSeries = new ChartSeries()
                 {
                     Name = $"{Stock.meta.symbol}",
-                    Data = new double[] { Convert.ToDouble(Stock.values[7].close), Convert.ToDouble(Stock.values[6].close), Convert.ToDouble(Stock.values[5].close), Convert.ToDouble(Stock.values[4].close),
-                                                                                                    Convert.ToDouble(Stock.values[3].close), Convert.ToDouble(Stock.values[2].close), Convert.ToDouble(Stock.values[1].close),}
+                    Data = new double[] {Convert.ToDouble(Stock.values[7].close), Convert.ToDouble(Stock.values[6].close), Convert.ToDouble(Stock.values[5].close), Convert.ToDouble(Stock.values[4].close),                                        
+                                        Convert.ToDouble(Stock.values[3].close), Convert.ToDouble(Stock.values[2].close), Convert.ToDouble(Stock.values[1].close), Convert.ToDouble(Stock.values[0].close)}
                 };
                 Series.Add(ChartSeries);
             }

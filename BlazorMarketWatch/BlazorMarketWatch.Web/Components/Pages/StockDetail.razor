@@ -33,11 +33,11 @@ else
                         <MudText Typo="Typo.h4">1 @TimeInterval[1..].ToUpper() Values:</MudText>
                     </MudCardHeader>
                     <MudCardContent>
-                        <MudText Typo="Typo.body1">Datetime: @Stock.values[1].datetime</MudText>
-                        <MudText Typo="Typo.body1">Open: @Convert.ToDouble(Stock.values[1].open).ToString("C")</MudText>
-                        <MudText Typo="Typo.body1">High: @Convert.ToDouble(Stock.values[1].high).ToString("C")</MudText>
-                        <MudText Typo="Typo.body1">Low: @Convert.ToDouble(Stock.values[1].low).ToString("C")</MudText>
-                        <MudText Typo="Typo.body1">Close: @Convert.ToDouble(Stock.values[1].close).ToString("C")</MudText>
+                        <MudText Typo="Typo.body1">Datetime: @Stock.values[0].datetime</MudText>
+                        <MudText Typo="Typo.body1">Open: @Convert.ToDouble(Stock.values[0].open).ToString("C")</MudText>
+                        <MudText Typo="Typo.body1">High: @Convert.ToDouble(Stock.values[0].high).ToString("C")</MudText>
+                        <MudText Typo="Typo.body1">Low: @Convert.ToDouble(Stock.values[0].low).ToString("C")</MudText>
+                        <MudText Typo="Typo.body1">Close: @Convert.ToDouble(Stock.values[0].close).ToString("C")</MudText>
                         <MudText Typo="Typo.body1">Volume: @Stock.values[1].volume</MudText>
                     </MudCardContent>
                 </MudCard>
@@ -55,7 +55,7 @@ else
                 </MudButtonGroup>
             </MudItem> 
             <MudItem sm="9">
-                <MudChart ChartType="ChartType.Line" ChartSeries="@Series" @bind-SelectedIndex="Index" XAxisLabels="@XAxisLabels" Width="100%" Height="350px" ChartOptions="@Options" />
+                <MudChart ChartType="ChartType.Line" ChartSeries="@Series" @bind-SelectedIndex="Index" XAxisLabels="@XAxisLabels" Width="100%" Height="450px" ChartOptions="@Options" />
             </MudItem>
         </MudGrid>
 
