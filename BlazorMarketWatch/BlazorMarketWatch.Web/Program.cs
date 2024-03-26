@@ -12,7 +12,7 @@ builder.Services.AddRazorComponents()
 builder.Services.AddMudServices();
 
 builder.Services.AddHttpClient();
-builder.Services.AddScoped<IStockService, StockService>();
+builder.Services.AddTransient<IStockService, StockService>();
 
 var app = builder.Build();
 

@@ -18,10 +18,21 @@ namespace BlazorMarketWatch.Web.Services
             {
                 using var httpClient = httpClientFactory.CreateClient();
 
-                var stockData = await httpClient.GetFromJsonAsync<StockDto.Rootobject>(
+                var response = await httpClient.GetAsync(
                     $"https://api.twelvedata.com/time_series?symbol={symbol}&interval={interval}&outputsize=10&apikey=1aaff2c87d404866a270852a157e04b7");
 
-                return stockData;
+
+                var stock = await response.Content.ReadFromJsonAsync<StockDto.Rootobject?>();
+
+                if ( stock.values != null ) 
+                {
+                    return stock;
+                }
+                else
+                {
+                    throw new Exception("Invalid Stock Ticker");
+                }
+
             }
             catch (Exception)
             {

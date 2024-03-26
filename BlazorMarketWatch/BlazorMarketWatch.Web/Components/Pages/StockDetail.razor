@@ -1,4 +1,4 @@
-﻿@page "/StockDetail/{Symbol}"
+﻿@page "/StockDetail/{Symbol}/{TimeInterval}"
 @inherits StockDetailBase
 
 @if (Stock == null && ErrorMessage == null)
@@ -30,26 +30,35 @@ else
             <MudItem sm="6">
                 <MudCard>
                     <MudCardHeader>
-                        <MudText Typo="Typo.h4">1 Day Values:</MudText>
+                        <MudText Typo="Typo.h4">1 @TimeInterval[1..].ToUpper() Values:</MudText>
                     </MudCardHeader>
                     <MudCardContent>
                         <MudText Typo="Typo.body1">Datetime: @Stock.values[1].datetime</MudText>
-                        <MudText Typo="Typo.body1">Open: $@Stock.values[1].open</MudText>
-                        <MudText Typo="Typo.body1">High: $@Stock.values[1].high</MudText>
-                        <MudText Typo="Typo.body1">Low: $@Stock.values[1].low</MudText>
-                        <MudText Typo="Typo.body1">Close: $@Stock.values[1].close</MudText>
+                        <MudText Typo="Typo.body1">Open: @Convert.ToDouble(Stock.values[1].open).ToString("C")</MudText>
+                        <MudText Typo="Typo.body1">High: @Convert.ToDouble(Stock.values[1].high).ToString("C")</MudText>
+                        <MudText Typo="Typo.body1">Low: @Convert.ToDouble(Stock.values[1].low).ToString("C")</MudText>
+                        <MudText Typo="Typo.body1">Close: @Convert.ToDouble(Stock.values[1].close).ToString("C")</MudText>
                         <MudText Typo="Typo.body1">Volume: @Stock.values[1].volume</MudText>
                     </MudCardContent>
                 </MudCard>
             </MudItem>
         </MudGrid>
 
-        <MudText Typo="Typo.h3" Align="Align.Center" Class="my-10">Daily Chart: </MudText>
+        <MudText Typo="Typo.h3" Align="Align.Center" Class="my-10">@TimeInterval[1..].ToUpper() Chart: </MudText>
 
         <MudGrid Justify="Justify.Center">
-            <MudItem>
+            <MudItem sm="3" Class="d-flex justify-end align-center">
+                <MudButtonGroup Color="Color.Primary" Variant="Variant.Text" VerticalAlign="true" Size="Size.Large">
+                    <MudButton OnClick='(() => ChangeChart_Click(Stock.meta.symbol , "1day"))'>Daily</MudButton>
+                    <MudButton OnClick='(() => ChangeChart_Click(Stock.meta.symbol , "1week"))'>Weekly</MudButton>
+                    <MudButton OnClick='(() => ChangeChart_Click(Stock.meta.symbol , "1month"))'>Monthly</MudButton>
+                </MudButtonGroup>
+            </MudItem> 
+            <MudItem sm="9">
                 <MudChart ChartType="ChartType.Line" ChartSeries="@Series" @bind-SelectedIndex="Index" XAxisLabels="@XAxisLabels" Width="100%" Height="350px" ChartOptions="@Options" />
             </MudItem>
         </MudGrid>
+
+        
     </MudContainer>
 }

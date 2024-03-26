@@ -11,7 +11,7 @@
     
     <MudGrid Class="mb-15" Justify="Justify.Center">
         <MudItem xs="6">
-            <MudButton Variant="Variant.Filled" Color="Color.Primary" FullWidth="true" Size="Size.Large" Href="">Search</MudButton>
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" FullWidth="true" Size="Size.Large" OnClick="(() => SearchStock_Click())">Search</MudButton>
         </MudItem>
     </MudGrid>
 
@@ -20,7 +20,7 @@
     <MudGrid >
         @foreach (var stock in TopStocks)
         {
-            <MudItem xs="3" sm="2" Class="d-flex align-center justify-center mud-width-full"><MudFab Label="@stock" /></MudItem>
+            <MudItem xs="3" sm="2" Class="d-flex align-center justify-center mud-width-full"><MudFab Href="@($"StockDetail/{stock}/1day")" Label="@stock" /></MudItem>
         }
     </MudGrid>
 </MudContainer>

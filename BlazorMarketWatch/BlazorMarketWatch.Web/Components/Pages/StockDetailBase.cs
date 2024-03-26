@@ -10,8 +10,14 @@ namespace BlazorMarketWatch.Web.Components.Pages
         [Parameter]
         public string Symbol { get; set; }
 
+        [Parameter]
+        public string TimeInterval { get; set; }
+
         [Inject]
         public IStockService StockService { get; set; }
+
+        [Inject]
+        public NavigationManager NavigationManager { get; set; }
 
         public StockDto.Rootobject? Stock { get; set; }
 
@@ -30,7 +36,7 @@ namespace BlazorMarketWatch.Web.Components.Pages
         {
             try
             {
-                Stock = await StockService.GetStock(Symbol, "1day");
+                Stock = await StockService.GetStock(Symbol, TimeInterval);
 
                 XAxisLabels = [Stock.values[7].datetime, Stock.values[6].datetime, Stock.values[5].datetime, Stock.values[4].datetime, Stock.values[3].datetime, Stock.values[2].datetime, Stock.values[1].datetime];
 
@@ -46,6 +52,11 @@ namespace BlazorMarketWatch.Web.Components.Pages
             {
                 ErrorMessage = ex.Message;
             }
+        }
+
+        protected void ChangeChart_Click(string symbol,string interval)
+        {
+            NavigationManager.NavigateTo($"StockDetail/{symbol}/{interval}", true);
         }
     }
 }
