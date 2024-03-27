@@ -1,4 +1,4 @@
-﻿using BlazorMarketWatch.Models.Dtos;
+﻿using BlazorMarketWatch.Web.Dtos;
 using BlazorMarketWatch.Web.Services.Contracts;
 
 namespace BlazorMarketWatch.Web.Services

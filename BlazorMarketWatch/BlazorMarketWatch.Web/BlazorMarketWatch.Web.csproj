@@ -81,11 +81,6 @@
     <PackageReference Include="MudBlazor" Version="6.*" />
   </ItemGroup>
 
-  
-  <ItemGroup>
-    <ProjectReference Include="..\BlazorMarketWatch.Models\BlazorMarketWatch.Models.csproj" />
-  </ItemGroup>
-
 
 
   

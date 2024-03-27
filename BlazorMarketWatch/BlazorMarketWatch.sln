@@ -4,11 +4,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorMarketWatch.Web", "BlazorMarketWatch.Web\BlazorMarketWatch.Web.csproj", "{CE013DD4-A19F-4753-940C-B8837BED0FE1}"
-	ProjectSection(ProjectDependencies) = postProject
-		{6BE5424E-2237-4B54-BE45-2172CDCB48F3} = {6BE5424E-2237-4B54-BE45-2172CDCB48F3}
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorMarketWatch.Models", "BlazorMarketWatch.Models\BlazorMarketWatch.Models.csproj", "{6BE5424E-2237-4B54-BE45-2172CDCB48F3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,10 +15,6 @@ Global
 		{CE013DD4-A19F-4753-940C-B8837BED0FE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE013DD4-A19F-4753-940C-B8837BED0FE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE013DD4-A19F-4753-940C-B8837BED0FE1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6BE5424E-2237-4B54-BE45-2172CDCB48F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6BE5424E-2237-4B54-BE45-2172CDCB48F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6BE5424E-2237-4B54-BE45-2172CDCB48F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6BE5424E-2237-4B54-BE45-2172CDCB48F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
