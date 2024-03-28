@@ -1,11 +1,14 @@
 ﻿using BlazorMarketWatch.Web.Dtos;
 using BlazorMarketWatch.Web.Services.Contracts;
+using System.Text.Json;
+using static BlazorMarketWatch.Web.Dtos.StockDto;
 
 namespace BlazorMarketWatch.Web.Services
 {
     public class StockService : IStockService
     {
         private readonly IHttpClientFactory httpClientFactory;
+        private TickerSummaryDto tickerSummary;
 
         public StockService (IHttpClientFactory httpClientFactory)
         {
@@ -37,6 +40,20 @@ namespace BlazorMarketWatch.Web.Services
             catch (Exception)
             {
                 throw;
+            }
+        }
+
+        public async Task<TickerSummaryDto> GetStockTickers()
+        {
+            try
+            {
+                var s = File.ReadAllText("wwwroot/tickers.json");
+                var dtos = JsonSerializer.Deserialize<TickerSummaryDto>(s);
+                return dtos;
+
+            }catch (Exception e)
+            {
+                return null;
             }
         }
     }

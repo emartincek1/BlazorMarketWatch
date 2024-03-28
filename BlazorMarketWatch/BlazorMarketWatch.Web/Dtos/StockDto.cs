@@ -1,15 +1,17 @@
-﻿namespace BlazorMarketWatch.Web.Dtos
+﻿using static System.Runtime.InteropServices.JavaScript.JSType;
+
+namespace BlazorMarketWatch.Web.Dtos
 {
     public class StockDto
     {
         public class Rootobject
         {
-            public Meta meta { get; set; }
+            public TickerSummary meta { get; set; }
             public Value[] values { get; set; }
             public string status { get; set; }
         }
 
-        public class Meta
+        public class TickerSummary
         {
             public string symbol { get; set; }
             public string interval { get; set; }
@@ -30,5 +32,10 @@
             public string volume { get; set; }
         }
 
+        public class TickerSummaryDto
+        {
+            public List<TickerSummary> data { get; set; }
+            public string status { get; set; }
+        }
     }
 }
