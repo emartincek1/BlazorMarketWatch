@@ -13,6 +13,16 @@ else
 {
     <MudContainer Class="mt-15">
         <MudGrid>
+            <MudItem sm="12" Class="d-flex justify-end align-center">
+                <AuthorizeView>
+                    <Authorized>
+                        <MudButton OnClick="(() => AddStock_Click(Stock.meta.symbol))" Class="my-6" Variant="Variant.Filled" Color="Color.Primary">Add stock to your watch!</MudButton>
+                    </Authorized>
+                    <NotAuthorized>
+                        <MudText Class="my-6" Typo="Typo.body1" Align="Align.Center">Log in to add stocks to your own stock watch!</MudText>
+                    </NotAuthorized>
+                </AuthorizeView>
+            </MudItem>
             <MudItem sm="6">
                 <MudCard>
                     <MudCardHeader>
@@ -58,7 +68,6 @@ else
                 <MudChart ChartType="ChartType.Line" ChartSeries="@Series" @bind-SelectedIndex="Index" XAxisLabels="@XAxisLabels" Width="100%" Height="450px" ChartOptions="@Options" />
             </MudItem>
         </MudGrid>
-
         
     </MudContainer>
 }

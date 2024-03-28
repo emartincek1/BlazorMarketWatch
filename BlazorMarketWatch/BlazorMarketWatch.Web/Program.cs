@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using MudBlazor.Services;
 using BlazorMarketWatch.Web.Components.Account;
 using BlazorMarketWatch.Web.Data;
+using BlazorMarketWatch.Web.Repositories.Contracts;
+using BlazorMarketWatch.Web.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +19,8 @@ builder.Services.AddRazorComponents()
 builder.Services.AddMudServices();
 
 builder.Services.AddHttpClient();
-builder.Services.AddTransient<IStockService, StockService>();
+builder.Services.AddScoped<IStockService, StockService>();
+builder.Services.AddScoped<IUserStockRepository, UserStockRepository>();
 
 
 builder.Services.AddCascadingAuthenticationState();

@@ -41,9 +41,16 @@ namespace BlazorMarketWatch.Web.Repositories
             return null;
         }
 
-        public Task<UserStock> DeleteUserStock(int id)
+        public async Task<UserStock> DeleteUserStock(int id)
         {
-            throw new NotImplementedException();
+            var userStock = await applicationDbContext.UserStocks.FindAsync(id); 
+
+            if (userStock != null)
+            {
+                applicationDbContext.UserStocks.Remove(userStock);
+                await applicationDbContext.SaveChangesAsync();
+            }
+            return userStock;
         }
 
         public async Task<IEnumerable<UserStock>> GetUserStocks(string userId)

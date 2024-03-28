@@ -1,6 +1,8 @@
 ﻿using BlazorMarketWatch.Web.Dtos;
+using BlazorMarketWatch.Web.Repositories.Contracts;
 using BlazorMarketWatch.Web.Services.Contracts;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
 
 namespace BlazorMarketWatch.Web.Components.Pages
@@ -18,6 +20,12 @@ namespace BlazorMarketWatch.Web.Components.Pages
 
         [Inject]
         public NavigationManager NavigationManager { get; set; }
+
+        [Inject]
+        public IUserStockRepository userStockRepository { get; set; }
+
+        [Inject]
+        public AuthenticationStateProvider authenticationStateProvider { get; set; }
 
         public StockDto.Rootobject? Stock { get; set; }
 
@@ -58,6 +66,32 @@ namespace BlazorMarketWatch.Web.Components.Pages
         protected void ChangeChart_Click(string symbol,string interval)
         {
             NavigationManager.NavigateTo($"StockDetail/{symbol}/{interval}", true);
+        }
+
+        protected async void AddStock_Click(string ticker)
+        {
+            try
+            {
+                var userId = await getUserId();
+                var result = await userStockRepository.AddUserStock(ticker, userId);
+                if (result == null) 
+                {
+                    throw new Exception("Add stock failed");
+                }
+                NavigationManager.NavigateTo($"YourWatch", true);
+            }
+            catch (Exception ex)
+            {
+
+                ErrorMessage = ex.Message;
+            }
+        }
+
+        async Task<string> getUserId()
+        {
+            var user = (await authenticationStateProvider.GetAuthenticationStateAsync()).User;
+            var UserId = user.FindFirst(u => u.Type.Contains("nameidentifier"))?.Value;
+            return UserId;
         }
     }
 }
