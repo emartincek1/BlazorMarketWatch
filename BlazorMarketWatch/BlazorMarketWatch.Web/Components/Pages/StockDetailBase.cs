@@ -89,7 +89,7 @@ namespace BlazorMarketWatch.Web.Components.Pages
 
         protected async void LoggedOut_Click()
         {
-            NavigationManager.NavigateTo("YourWatch", true);
+            NavigationManager.NavigateTo("Account/Login", true);
         }
 
         async Task<string> getUserId()
