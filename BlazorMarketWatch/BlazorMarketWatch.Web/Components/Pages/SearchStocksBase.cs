@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Components;
 using static BlazorMarketWatch.Web.Dtos.StockDto;
 
+
 namespace BlazorMarketWatch.Web.Components.Pages
 {
     public class SearchStocksBase:ComponentBase
@@ -24,7 +25,27 @@ namespace BlazorMarketWatch.Web.Components.Pages
 
         protected void SearchStock_Click()
         {
-            NavigationManager.NavigateTo($"StockDetail/{TextValue}/1day");
+            var ticker = TextValue.Split(" ");
+            NavigationManager.NavigateTo($"StockDetail/{ticker[0]}/1day");
+        }
+
+        protected async Task<IEnumerable<string>> Search(string value)
+        {
+            if (string.IsNullOrEmpty(value))
+                return new string[0];
+            var tickers = TickerSummary.data.Where(x => x.symbol.Contains(value, StringComparison.InvariantCultureIgnoreCase)
+                                                    || x.name.Contains(value, StringComparison.InvariantCultureIgnoreCase));
+            return Convert(tickers);
+        }
+
+        private IEnumerable<string> Convert(IEnumerable<TickerSummary> tickerSummaries)
+        {
+            List<string> result = new List<string>();
+            foreach (var tickerSummary in tickerSummaries)
+            {
+                result.Add($"{tickerSummary.symbol} - {tickerSummary.name}");
+            }
+            return result;
         }
     }
 }

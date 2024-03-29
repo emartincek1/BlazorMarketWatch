@@ -4,11 +4,9 @@
 <MudContainer MaxWidth="MaxWidth.Medium">
 
     <MudText Typo="Typo.h1" Align="Align.Center" Class="my-4">Search Stocks</MudText>
-
-    <MudGrid Class="mt-10 mb-5" >
-        <MudTextField @bind-Value="TextValue" Label="Search Stock Ticker Here" Variant="Variant.Outlined"></MudTextField>
-    </MudGrid>
     
+    <MudAutocomplete Class="mb-10" T="string" Label="Search Company or Ticker" @bind-Value="TextValue" SearchFunc="@Search" AdornmentIcon="@Icons.Material.Filled.Search" />
+
     <MudGrid Class="mb-15" Justify="Justify.Center">
         <MudItem xs="6">
             <MudButton Variant="Variant.Filled" Color="Color.Primary" FullWidth="true" Size="Size.Large" OnClick="(() => SearchStock_Click())">Search</MudButton>

@@ -87,6 +87,11 @@ namespace BlazorMarketWatch.Web.Components.Pages
             }
         }
 
+        protected async void LoggedOut_Click()
+        {
+            NavigationManager.NavigateTo("YourWatch", true);
+        }
+
         async Task<string> getUserId()
         {
             var user = (await authenticationStateProvider.GetAuthenticationStateAsync()).User;

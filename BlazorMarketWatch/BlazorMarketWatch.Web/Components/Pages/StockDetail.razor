@@ -19,7 +19,7 @@ else
                         <MudButton OnClick="(() => AddStock_Click(Stock.meta.symbol))" Class="my-6" Variant="Variant.Filled" Color="Color.Primary">Add stock to your watch!</MudButton>
                     </Authorized>
                     <NotAuthorized>
-                        <MudText Class="my-6" Typo="Typo.body1" Align="Align.Center">Log in to add stocks to your own stock watch!</MudText>
+                        <MudButton OnClick="(() => LoggedOut_Click())" Class="my-6" Variant="Variant.Filled" Color="Color.Primary">Add stock to your watch!</MudButton>
                     </NotAuthorized>
                 </AuthorizeView>
             </MudItem>
