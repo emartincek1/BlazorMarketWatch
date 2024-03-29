@@ -35,8 +35,6 @@ namespace BlazorMarketWatch.Web.Components.Pages
 
         public int Index = -1;
 
-
-
         public ChartOptions Options = new ChartOptions();
 
         public List<ChartSeries> Series = new List<ChartSeries>();

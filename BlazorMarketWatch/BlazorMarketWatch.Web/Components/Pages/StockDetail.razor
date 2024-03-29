@@ -24,10 +24,10 @@ else
                                 <MudItem md="6" Class="d-flex justify-end align-center py-0">
                                 <AuthorizeView>
                                     <Authorized>
-                                        <MudButton OnClick="(() => AddStock_Click(Stock.meta.symbol))" Class="my-6" Variant="Variant.Filled" Color="Color.Primary">Add stock to your watch</MudButton>
+                                        <MudButton OnClick="(() => AddStock_Click(Stock.meta.symbol))" Class="my-6" Variant="Variant.Filled" Color="Color.Primary">+ Watch Stock</MudButton>
                                     </Authorized>
                                     <NotAuthorized>
-                                        <MudButton OnClick="(() => LoggedOut_Click())" Class="my-6" Variant="Variant.Filled" Color="Color.Primary">Add stock to your watch!</MudButton>
+                                        <MudButton OnClick="(() => LoggedOut_Click())" Class="my-6" Variant="Variant.Filled" Color="Color.Primary">+ Watch Stock</MudButton>
                                     </NotAuthorized>
                                 </AuthorizeView>
                             </MudItem>
@@ -75,7 +75,7 @@ else
                         <MudChart ChartType="ChartType.Line" ChartSeries="@Series" @bind-SelectedIndex="Index" XAxisLabels="@XAxisLabels" Width="100%" Height="450px" ChartOptions="@Options" />
                     </MudCardContent>
                     <MudCardContent>
-                        <MudSimpleTable>
+                        <MudSimpleTable Bordered="true" FixedHeader="true" Style="height:300px">                          
                             <thead>
                                 <tr>
                                     <th>Performance</th>
@@ -86,9 +86,9 @@ else
                                     <th>Close</th>
                                     <th>Volume</th>
                                 </tr>
-                            </thead>
+                            </thead>                             
                             <tbody>
-                                @for (var i = 0; i < 7; i++)
+                                @for (var i = 0; i < 8; i++)
                                 {
                                     <tr>
                                         @if (Convert.ToDouble(Stock.values[i].open) <= Convert.ToDouble(Stock.values[i].close))
@@ -106,9 +106,8 @@ else
                                         <td>@Convert.ToDouble(Stock.values[i].close).ToString("C")</td>
                                         <td>@Stock.values[i].volume</td>
                                     </tr>
-                                }
-                                
-                            </tbody>
+                                }                               
+                            </tbody>                                
                         </MudSimpleTable>
                     </MudCardContent>
                    
