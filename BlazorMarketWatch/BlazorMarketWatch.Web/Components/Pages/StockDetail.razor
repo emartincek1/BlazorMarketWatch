@@ -13,61 +13,112 @@ else
 {
     <MudContainer >
         <MudGrid>
-            <MudItem sm="12" Class="d-flex justify-end align-center">
-                <AuthorizeView>
-                    <Authorized>
-                        <MudButton OnClick="(() => AddStock_Click(Stock.meta.symbol))" Class="my-6" Variant="Variant.Filled" Color="Color.Primary">Add stock to your watch!</MudButton>
-                    </Authorized>
-                    <NotAuthorized>
-                        <MudButton OnClick="(() => LoggedOut_Click())" Class="my-6" Variant="Variant.Filled" Color="Color.Primary">Add stock to your watch!</MudButton>
-                    </NotAuthorized>
-                </AuthorizeView>
-            </MudItem>
-            <MudItem sm="6">
-                <MudCard>
+
+            <MudItem sm="12">
+                <MudCard Style="@($"background:rgba(39, 39, 47, 1)")">
                     <MudCardHeader>
-                        <MudText Typo="Typo.h3">@Stock.meta.symbol</MudText>
+                        <MudGrid>
+                            <MudItem sm="6">
+                                    <MudText Typo="Typo.h2">@Stock.meta.symbol</MudText>
+                            </MudItem>
+                                <MudItem md="6" Class="d-flex justify-end align-center py-0">
+                                <AuthorizeView>
+                                    <Authorized>
+                                        <MudButton OnClick="(() => AddStock_Click(Stock.meta.symbol))" Class="my-6" Variant="Variant.Filled" Color="Color.Primary">Add stock to your watch</MudButton>
+                                    </Authorized>
+                                    <NotAuthorized>
+                                        <MudButton OnClick="(() => LoggedOut_Click())" Class="my-6" Variant="Variant.Filled" Color="Color.Primary">Add stock to your watch!</MudButton>
+                                    </NotAuthorized>
+                                </AuthorizeView>
+                            </MudItem>
+                        </MudGrid>
                     </MudCardHeader>
                     <MudCardContent>
-                        <MudText Typo="Typo.body1">Currency: @Stock.meta.currency</MudText>
-                        <MudText Typo="Typo.body1">Exchange Timezone: @Stock.meta.exchange_timezone</MudText>
-                        <MudText Typo="Typo.body1">Exchange: @Stock.meta.exchange</MudText>
-                        <MudText Typo="Typo.body1">Mic code: @Stock.meta.mic_code</MudText>
-                        <MudText Typo="Typo.body1">Type: @Stock.meta.type</MudText>
+                        <MudChip Icon="@Icons.Material.Filled.AttachMoney" Variant="Variant.Outlined" Color="Color.Secondary"><MudText Typo="Typo.h5">@Stock.meta.currency</MudText></MudChip>
+                        <MudChip Icon="@Icons.Material.Filled.AccessTime" Variant="Variant.Outlined" Color="Color.Secondary"><MudText Typo="Typo.h5">@Stock.meta.exchange_timezone</MudText></MudChip>
+                        <MudChip Icon="@Icons.Material.Filled.CurrencyExchange" Variant="Variant.Outlined" Color="Color.Secondary"><MudText Typo="Typo.h5">@Stock.meta.exchange</MudText></MudChip>
+                        <br />
+                        <MudChip Icon="@Icons.Material.Filled.QrCode2" Variant="Variant.Outlined" Color="Color.Secondary"><MudText Typo="Typo.h5">@Stock.meta.mic_code</MudText></MudChip>
+                        <MudChip Icon="@Icons.Material.Filled.Category" Variant="Variant.Outlined" Color="Color.Secondary"><MudText Typo="Typo.h5">@Stock.meta.type</MudText></MudChip>
                     </MudCardContent>
                 </MudCard>
             </MudItem>
-            <MudItem sm="6">
-                <MudCard>
+
+            <MudItem sm="12" Class="mb-3">
+                <MudCard Style="@($"background:rgba(39, 39, 47, 1)")">
                     <MudCardHeader>
-                        <MudText Typo="Typo.h4">1 @TimeInterval[1..].ToUpper() Values:</MudText>
+                        <MudGrid>
+                            <MudItem sm="12" Class="d-flex justify-content-end">
+                                <MudButtonGroup Color="Color.Primary" Variant="Variant.Filled" Size="Size.Large">
+                                    <MudButton OnClick='(() => ChangeChart_Click(Stock.meta.symbol , "1day"))'><MudText Typo="Typo.h6">Daily</MudText></MudButton>
+                                    <MudButton OnClick='(() => ChangeChart_Click(Stock.meta.symbol , "1week"))'><MudText Typo="Typo.h6">Weekly</MudText></MudButton>
+                                    <MudButton OnClick='(() => ChangeChart_Click(Stock.meta.symbol , "1month"))'><MudText Typo="Typo.h6">Monthly</MudText></MudButton>
+                                </MudButtonGroup>
+                            </MudItem>
+                            <MudItem sm="12">
+                                @if (TimeInterval == "1day")
+                                {
+                                    <MudText Align="Align.Center" Typo="Typo.h2">Daily Close Price</MudText>
+                                }
+                                else if (TimeInterval == "1week")
+                                {
+                                    <MudText Align="Align.Center" Typo="Typo.h2">Weekly Close Price</MudText>
+                                }
+                                else
+                                {
+                                    <MudText Align="Align.Center" Typo="Typo.h2">Monthly Close Price</MudText>
+                                }
+                            </MudItem>
+                        </MudGrid>
                     </MudCardHeader>
                     <MudCardContent>
-                        <MudText Typo="Typo.body1">Datetime: @Stock.values[0].datetime</MudText>
-                        <MudText Typo="Typo.body1">Open: @Convert.ToDouble(Stock.values[0].open).ToString("C")</MudText>
-                        <MudText Typo="Typo.body1">High: @Convert.ToDouble(Stock.values[0].high).ToString("C")</MudText>
-                        <MudText Typo="Typo.body1">Low: @Convert.ToDouble(Stock.values[0].low).ToString("C")</MudText>
-                        <MudText Typo="Typo.body1">Close: @Convert.ToDouble(Stock.values[0].close).ToString("C")</MudText>
-                        <MudText Typo="Typo.body1">Volume: @Stock.values[1].volume</MudText>
+                        <MudChart ChartType="ChartType.Line" ChartSeries="@Series" @bind-SelectedIndex="Index" XAxisLabels="@XAxisLabels" Width="100%" Height="450px" ChartOptions="@Options" />
                     </MudCardContent>
+                    <MudCardContent>
+                        <MudSimpleTable>
+                            <thead>
+                                <tr>
+                                    <th>Performance</th>
+                                    <th>Date</th>
+                                    <th>Open</th>
+                                    <th>High</th>
+                                    <th>Low</th>
+                                    <th>Close</th>
+                                    <th>Volume</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (var i = 0; i < 7; i++)
+                                {
+                                    <tr>
+                                        @if (Convert.ToDouble(Stock.values[i].open) <= Convert.ToDouble(Stock.values[i].close))
+                                        {
+                                            <td><MudIcon Icon="@Icons.Material.Filled.ArrowUpward" Color="Color.Success" /></td>
+                                        }
+                                        else
+                                        {
+                                            <td><MudIcon Icon="@Icons.Material.Filled.ArrowDownward" Color="Color.Error" /></td>
+                                        }
+                                        <td>@Stock.values[i].datetime</td>
+                                        <td>@Convert.ToDouble(Stock.values[i].open).ToString("C")</td>
+                                        <td>@Convert.ToDouble(Stock.values[i].high).ToString("C")</td>
+                                        <td>@Convert.ToDouble(Stock.values[i].low).ToString("C")</td>
+                                        <td>@Convert.ToDouble(Stock.values[i].close).ToString("C")</td>
+                                        <td>@Stock.values[i].volume</td>
+                                    </tr>
+                                }
+                                
+                            </tbody>
+                        </MudSimpleTable>
+                    </MudCardContent>
+                   
                 </MudCard>
             </MudItem>
+
+            
+            
         </MudGrid>
 
-        <MudText Typo="Typo.h3" Align="Align.Center" Class="my-10">@TimeInterval[1..].ToUpper() Chart: </MudText>
-
-        <MudGrid Justify="Justify.Center">
-            <MudItem sm="3" Class="d-flex justify-end align-center">
-                <MudButtonGroup Color="Color.Primary" Variant="Variant.Text" VerticalAlign="true" Size="Size.Large">
-                    <MudButton OnClick='(() => ChangeChart_Click(Stock.meta.symbol , "1day"))'>Daily</MudButton>
-                    <MudButton OnClick='(() => ChangeChart_Click(Stock.meta.symbol , "1week"))'>Weekly</MudButton>
-                    <MudButton OnClick='(() => ChangeChart_Click(Stock.meta.symbol , "1month"))'>Monthly</MudButton>
-                </MudButtonGroup>
-            </MudItem> 
-            <MudItem sm="9">
-                <MudChart ChartType="ChartType.Line" ChartSeries="@Series" @bind-SelectedIndex="Index" XAxisLabels="@XAxisLabels" Width="100%" Height="450px" ChartOptions="@Options" />
-            </MudItem>
-        </MudGrid>
         
     </MudContainer>
 }

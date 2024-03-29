@@ -22,19 +22,24 @@ else
             @foreach (var summary in Summaries)
             {
                 <MudItem sm="6">
-                    <MudCard>
+                    <MudCard Style="@($"background:rgba(39, 39, 47, 1)")">
                         <MudCardHeader>
                             <CardHeaderContent>
-                                <MudText Typo="Typo.h6">@summary.name</MudText>
+                                <MudText Typo="Typo.h2">@summary.symbol</MudText>
                             </CardHeaderContent>
                         </MudCardHeader>
                         <MudCardContent>
-                            <MudText>Ticker: @summary.symbol</MudText>
-                            <MudText>Exhange: @summary.exchange</MudText>
+                            <MudText Class="mb-4" Typo="Typo.h4">@summary.name</MudText>
+                            <MudChip Icon="@Icons.Material.Filled.CurrencyExchange" Variant="Variant.Text" Color="Color.Secondary">@summary.exchange</MudChip>
+                            <MudChip Icon="@Icons.Material.Filled.AttachMoney" Variant="Variant.Text" Color="Color.Secondary">@summary.currency</MudChip>
                         </MudCardContent>
-                        <MudCardActions>
-                            <MudButton Variant="Variant.Text" Color="Color.Primary" OnClick="(() => RemoveStock_Click(summary.symbol))">Remove</MudButton>
-                            <MudButton Variant="Variant.Text" Color="Color.Primary" Href="@($"StockDetail/{summary.symbol}/1day")">Details</MudButton>
+                        <MudCardActions Class="justify-end">
+                            <MudButton Size="Size.Large" Variant="Variant.Text" Color="Color.Primary" OnClick="(() => RemoveStock_Click(summary.symbol))">
+                                <MudText Typo="Typo.h5" Align="Align.Center">Remove</MudText>
+                            </MudButton>
+                            <MudButton Size="Size.Large" Variant="Variant.Text" Color="Color.Primary" Href="@($"StockDetail/{summary.symbol}/1day")">
+                                <MudText Typo="Typo.h5" Align="Align.Center">Details</MudText>
+                            </MudButton>
                         </MudCardActions>
                     </MudCard>
                 </MudItem>
