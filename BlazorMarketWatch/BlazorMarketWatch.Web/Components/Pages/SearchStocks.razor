@@ -18,9 +18,16 @@
     <hr />
 
     <MudGrid >
-        @foreach (var stock in TopStocks)
-        {
-            <MudItem xs="3" sm="2" Class="d-flex align-center justify-center mud-width-full"><MudFab Href="@($"StockDetail/{stock}/1day")" Label="@stock" /></MudItem>
-        }
+        <MudItem xs="12" >
+            <ul>
+                @foreach (var stock in TopStocks)
+                {
+                    <li><MudFab Href="@($"StockDetail/{stock}/1day")" Label="@stock" /></li>
+                }
+            </ul>
+        </MudItem>
     </MudGrid>
+
 </MudContainer>
+
+<MarketMoversTicker />

@@ -1,0 +1,49 @@
+﻿@page "/OnlineHype"
+@inherits RedditStocksBase
+
+@if (RedditStocks == null && ErrorMessage == null)
+{
+    <h1>Loading...</h1>
+}
+else if (ErrorMessage != null)
+{
+    <h1>@ErrorMessage</h1>
+}
+else
+{
+    <MudContainer MaxWidth="MaxWidth.Large">
+        <MudText Typo="Typo.h1" Align="Align.Center" Class="my-10">Online Hype</MudText>
+        <MudText Typo="Typo.h5" Align="Align.Center" Class="my-10">Stocks metioned and sentiment on popular subreddit WallStreetBets</MudText>
+        <hr />
+        <MudGrid>
+            @foreach (var stock in RedditStocks)
+            {
+                <MudItem sm="6" md="3">
+                    <MudCard Style="@($"background:rgba(39, 39, 47, 1)")">
+                        <MudCardHeader>
+                            <CardHeaderContent>
+                                <MudText Typo="Typo.h2">@stock.ticker</MudText>
+                            </CardHeaderContent>
+                        </MudCardHeader>
+                        <MudCardContent>
+                            <MudText Class="mb-4" Typo="Typo.h4">Number of Comments - @stock.no_of_comments</MudText>
+                            @if (stock.sentiment == "Bullish")
+                            {
+                                <MudChip Size="Size.Large" Icon="@Icons.Material.Filled.NorthEast" Variant="Variant.Text" Color="Color.Success">@stock.sentiment</MudChip>
+                            }
+                            else
+                            {
+                                <MudChip Size="Size.Large" Icon="@Icons.Material.Filled.SouthEast" Variant="Variant.Text" Color="Color.Error">@stock.sentiment</MudChip>
+                            }
+                        </MudCardContent>
+                        <MudCardActions Class="justify-end">
+                            <MudButton Size="Size.Large" Variant="Variant.Text" Color="Color.Primary" Href="@($"StockDetail/{stock.ticker}/1day")">
+                                <MudText Typo="Typo.h5" Align="Align.Center">Details</MudText>
+                            </MudButton>
+                        </MudCardActions>
+                    </MudCard>
+                </MudItem>
+            }
+        </MudGrid>
+    </MudContainer>
+}
