@@ -20,6 +20,7 @@ builder.Services.AddMudServices();
 
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<IStockService, StockService>();
+builder.Services.AddScoped<IMarketMoversService, MarketMoversService>();
 builder.Services.AddScoped<IUserStockRepository, UserStockRepository>();
 
 

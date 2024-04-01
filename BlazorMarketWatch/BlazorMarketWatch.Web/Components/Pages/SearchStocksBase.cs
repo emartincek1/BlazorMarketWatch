@@ -25,8 +25,15 @@ namespace BlazorMarketWatch.Web.Components.Pages
 
         protected void SearchStock_Click()
         {
-            var ticker = TextValue.Split(" ");
-            NavigationManager.NavigateTo($"StockDetail/{ticker[0]}/1day");
+            if (TextValue == null ) 
+            {
+                NavigationManager.NavigateTo($"StockDetail/Invalid/1day");
+            }
+            else
+            {
+                var ticker = TextValue.Split(" ");
+                NavigationManager.NavigateTo($"StockDetail/{ticker[0]}/1day");
+            }            
         }
 
         protected async Task<IEnumerable<string>> Search(string value)
@@ -40,7 +47,7 @@ namespace BlazorMarketWatch.Web.Components.Pages
 
         private IEnumerable<string> Convert(IEnumerable<TickerSummary> tickerSummaries)
         {
-            List<string> result = new List<string>();
+            List<string> result = [];
             foreach (var tickerSummary in tickerSummaries)
             {
                 result.Add($"{tickerSummary.symbol} - {tickerSummary.name}");

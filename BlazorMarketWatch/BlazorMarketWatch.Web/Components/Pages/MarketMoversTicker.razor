@@ -1,0 +1,41 @@
+﻿@inherits MarketMoversTickerBase
+
+
+@if (MarketMovers == null && ErrorMessage == null)
+{
+    <h1>Loading...</h1>
+}
+else if (ErrorMessage != null)
+{
+    <h1>@ErrorMessage</h1>
+}
+else 
+{
+    <div class="ticker-wrap">
+        <div class="ticker">
+            <div class="ticker__item">@MarketMovers.last_updated.Substring(0, 10)</div>
+
+            <div class="ticker__item">Top Gainers: </div>
+
+            @foreach (var stock in MarketMovers.top_gainers)      
+            {
+                <div class="ticker__item">@stock.ticker (+@stock.change_percentage)</div>
+            }
+
+            <div class="ticker__item">Top Losers: </div>
+
+            @foreach (var stock in MarketMovers.top_losers)
+            {
+                <div class="ticker__item">@stock.ticker (@stock.change_percentage)</div>
+            }
+
+            <div class="ticker__item">Top Volume: </div>
+
+            @foreach (var stock in MarketMovers.most_actively_traded)
+            {
+                <div class="ticker__item">@stock.ticker (@stock.volume)</div>
+            }
+
+        </div>
+    </div>
+}
