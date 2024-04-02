@@ -1,0 +1,23 @@
+﻿@inherits StockNewsBase
+
+@if (StockNews == null && ErrorMessage == null)
+{
+    <h1>Loading...</h1>
+}
+else if (ErrorMessage != null)
+{
+    <h1>@ErrorMessage</h1>
+}
+else
+{
+    @foreach (var article in StockNews.data)
+    {
+        <MudCardContent>
+            <MudLink Href="@article.url"><MudText Typo="Typo.h6">@article.title</MudText></MudLink>
+            <MudText Typo="Typo.body1">@article.description</MudText>
+            <MudText Typo="Typo.body1">@article.source</MudText>
+            <MudText Typo="Typo.body1">Published @article.published_at.ToShortDateString()</MudText>
+            <hr />
+        </MudCardContent>
+    }
+}

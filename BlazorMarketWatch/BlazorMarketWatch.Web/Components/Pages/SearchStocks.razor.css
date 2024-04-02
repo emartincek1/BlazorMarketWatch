@@ -1,0 +1,9 @@
+﻿ul  {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+}
+
+li {
+    flex: 0 0 auto;
+}

@@ -16,13 +16,17 @@
     <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
         <NavMenu />
     </MudDrawer>
-    <MudMainContent Class="mt-16 pa-4">
+    <MudMainContent Class="mt-5 ">
         @Body
     </MudMainContent>
+    @if(ticker){
+    <MarketMoversTicker />
+    }
 </MudLayout>
 
-@code {
+    @code {
     private bool _drawerOpen = true;
+    private bool ticker = true;
 
     private void DrawerToggle()
     {

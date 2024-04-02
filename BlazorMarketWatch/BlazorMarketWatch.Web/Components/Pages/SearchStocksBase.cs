@@ -20,7 +20,7 @@ namespace BlazorMarketWatch.Web.Components.Pages
         protected async override Task OnInitializedAsync()
         {
             TickerSummary = await StockService.GetStockTickers();
-            TopStocks = new List<string> { "AAPL", "XOM", "WMT", "TSLA", "PYPL", "NFLX", "MSFT", "MMM", "META", "KO", "GOOGL", "COST" };
+            TopStocks = new List<string> { "AAPL", "SPY", "XOM", "WMT", "TSLA", "PYPL", "NFLX", "MSFT", "MMM", "META", "KO", "GOOGL", "COST" };
         }
 
         protected void SearchStock_Click()

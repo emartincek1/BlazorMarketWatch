@@ -22,6 +22,7 @@ builder.Services.AddHttpClient();
 builder.Services.AddScoped<IStockService, StockService>();
 builder.Services.AddScoped<IMarketMoversService, MarketMoversService>();
 builder.Services.AddScoped<IRedditService, RedditService>();
+builder.Services.AddScoped<IStockNewsService, StockNewsService>();
 builder.Services.AddScoped<IUserStockRepository, UserStockRepository>();
 
 

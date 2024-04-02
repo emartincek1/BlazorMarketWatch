@@ -114,6 +114,16 @@ else
                 </MudCard>
             </MudItem>
 
+            <MudItem sm="12" Class="mb-3">
+                <MudCard Style="@($"background:rgba(39, 39, 47, 1)")">
+                    <MudCardHeader>
+                        <MudText Typo="Typo.h2">@Stock.meta.symbol News</MudText>
+                    </MudCardHeader>
+                    
+                    <StockNews Symbol="@Stock.meta.symbol" />
+
+                </MudCard>
+            </MudItem>
             
             
         </MudGrid>

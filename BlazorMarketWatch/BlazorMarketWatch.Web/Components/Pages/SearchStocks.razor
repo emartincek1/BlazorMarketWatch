@@ -3,31 +3,58 @@
 
 <MudContainer MaxWidth="MaxWidth.Medium">
 
-    <MudText Typo="Typo.h1" Align="Align.Center" Class="my-4">Search Stocks</MudText>
+    <MudText Typo="Typo.h1" Align="Align.Center" Class="mb-4 mt-16">Search Stocks</MudText>
     
     <MudAutocomplete Class="mb-10" T="string" Label="Search Company or Ticker" @bind-Value="TextValue" SearchFunc="@Search" AdornmentIcon="@Icons.Material.Filled.Search" />
 
-    <MudGrid Class="mb-15" Justify="Justify.Center">
+    <MudGrid Class="mb-16" Justify="Justify.Center">
         <MudItem xs="6">
             <MudButton Variant="Variant.Filled" Color="Color.Primary" FullWidth="true" Size="Size.Large" OnClick="(() => SearchStock_Click())">Search</MudButton>
         </MudItem>
     </MudGrid>
 
-    <MudText Typo="Typo.h4" Align="Align.Center" Class="mb-7">Popular Stocks</MudText>
-
-    <hr />
+    <MudText Typo="Typo.h4" Align="Align.Center" Class=" mt-16 mb-7">Popular Stocks</MudText>
 
     <MudGrid >
         <MudItem xs="12" >
             <ul>
                 @foreach (var stock in TopStocks)
                 {
-                    <li><MudFab Href="@($"StockDetail/{stock}/1day")" Label="@stock" /></li>
+                    <li>
+                        <MudCard Style="background:rgba(39, 39, 47, 1); width:230px; height: 235px" Class="mx-2 ">
+                            <MudCardHeader>
+                                <CardHeaderContent>
+                                    <MudText Typo="Typo.h2">@stock</MudText>
+                                </CardHeaderContent>
+                            </MudCardHeader>
+                            <MudCardContent Class="d-inline-flex">
+                                <MudChip Size="Size.Small" Icon="@Icons.Material.Filled.Star" Variant="Variant.Text" Color="Color.Warning">Top Perfromer</MudChip>
+                            </MudCardContent>
+                            <MudCardActions Class="justify-end">
+                                <MudButton Size="Size.Large" Variant="Variant.Text" Color="Color.Primary " Href="@($"StockDetail/{stock}/1day")">
+                                    <MudText Typo="Typo.h5" Align="Align.Center">Details</MudText>
+                                </MudButton>
+                            </MudCardActions>
+                        </MudCard>
+                    </li>
                 }
+            </ul>
+        </MudItem>
+    </MudGrid>
+
+    <MudText Typo="Typo.h4" Align="Align.Center" Class="my-7">Stocks on WallStreetBets</MudText>
+    
+
+    <MudGrid>
+        <MudItem xs="12" Class="mb-15">
+            <ul>
+                <RedditStocks />
             </ul>
         </MudItem>
     </MudGrid>
 
 </MudContainer>
 
-<MarketMoversTicker />
+
+
+       
