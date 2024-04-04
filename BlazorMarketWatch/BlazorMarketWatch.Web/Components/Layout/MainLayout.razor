@@ -28,9 +28,10 @@
     private bool _drawerOpen = true;
     private bool ticker = true;
 
-    private void DrawerToggle()
+    private async void DrawerToggle()
     {
         _drawerOpen = !_drawerOpen;
+        await InvokeAsync(StateHasChanged);
     }
     private bool _isDarkMode = true;
 }

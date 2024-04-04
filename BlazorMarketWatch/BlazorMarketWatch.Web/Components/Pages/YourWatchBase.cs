@@ -47,7 +47,7 @@ namespace BlazorMarketWatch.Web.Components.Pages
                 {
                     throw new Exception("Error converting tickers to summaries");
                 }
-                StateHasChanged();
+                await InvokeAsync(StateHasChanged);
             }
             catch (Exception ex)
             {
